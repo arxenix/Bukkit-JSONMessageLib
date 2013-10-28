@@ -1,0 +1,5 @@
+name: JSONMessageLib
+version: 0.0.1
+description: Build JSON Messages
+author: bobacadodl
+main: com.bobacadodl.JSONChatLib.JSONChatLib
