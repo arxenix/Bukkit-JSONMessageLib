@@ -40,8 +40,11 @@ public class JSONChatMessage {
 
     public void sendToPlayer(Player player) {
         //Bukkit.getLogger().info(chatObject.toJSONString());
-        Packet3Chat packet = new Packet3Chat(chatObject.toJSONString(), true);
-        ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
+        //Packet3Chat packet = new Packet3Chat(chatObject.toJSONString(), true);
+        //((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
+        
+        ((CraftPlayer) player).getHandle().playerConnection.sendPacket(new PacketPlayOutChat(ChatSerializer.a(chatObject.toJSONString()), true));
+
     }
 
     public String toString() {
