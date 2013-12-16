@@ -1,7 +1,5 @@
 package com.bobacadodl.JSONChatLib;
 
-import net.minecraft.server.v1_6_R3.Packet3Chat;
-import org.bukkit.craftbukkit.v1_6_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
