@@ -42,8 +42,12 @@ public class JSONChatMessage {
         //Bukkit.getLogger().info(chatObject.toJSONString());
         //Packet3Chat packet = new Packet3Chat(chatObject.toJSONString(), true);
         //((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
-        
-        ((CraftPlayer) player).getHandle().playerConnection.sendPacket(new PacketPlayOutChat(ChatSerializer.a(chatObject.toJSONString()), true));
+        Object nmsPlayer = player.getClass().getMethod("getHandle").invoke(player);
+        Object playerCon = nmsPlayer.getClass().getField("playerConnection").get(nmsPlayer);
+        String nmsPath = "net.minecraft.server." + Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3];
+        Class<?> packetClass = Class.forName(nmsPath + ".PacketPlayOutChat");
+        Object packet = packetClass.getConstructor(Class.forName(nmsPath + ".IChatBaseComponent"), boolean.class).newInstance("chatObject.toJSONString(), true);
+        playerCon.getClass().getMethod("sendPacket", packet.getClass()).invoke(playerCon, packet);
 
     }
 
